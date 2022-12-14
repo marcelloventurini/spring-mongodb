@@ -1,5 +1,6 @@
 package com.marcelloventurini.springmongodb.resources;
 
+import com.marcelloventurini.springmongodb.dto.UserDTO;
 import com.marcelloventurini.springmongodb.entities.User;
 import com.marcelloventurini.springmongodb.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,9 @@ public class UserResource {
   private UserService userService;
 
   @GetMapping
-  public ResponseEntity<List<User>> findAll() {
+  public ResponseEntity<List<UserDTO>> findAll() {
     List<User> list = userService.findAll();
-    return ResponseEntity.ok().body(list);
+    List<UserDTO> dtoList = list.stream().map(o -> new UserDTO(o)).toList();
+    return ResponseEntity.ok().body(dtoList);
   }
 }
