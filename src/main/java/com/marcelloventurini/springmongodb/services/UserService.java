@@ -1,5 +1,6 @@
 package com.marcelloventurini.springmongodb.services;
 
+import com.marcelloventurini.springmongodb.dto.UserDTO;
 import com.marcelloventurini.springmongodb.entities.User;
 import com.marcelloventurini.springmongodb.repositories.UserRepository;
 import com.marcelloventurini.springmongodb.services.exceptions.ObjectNotFoundException;
@@ -21,5 +22,13 @@ public class UserService {
   public User findById(String id) {
     Optional<User> user = userRepository.findById(id);
     return user.orElseThrow(() -> new ObjectNotFoundException("Object not fount"));
+  }
+
+  public User insert(User user) {
+    return userRepository.insert(user);
+  }
+
+  public User fromDTO(UserDTO userDTO) {
+    return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
   }
 }
