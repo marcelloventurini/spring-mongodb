@@ -1,6 +1,7 @@
 package com.marcelloventurini.springmongodb.resources;
 
 import com.marcelloventurini.springmongodb.dto.UserDTO;
+import com.marcelloventurini.springmongodb.entities.Post;
 import com.marcelloventurini.springmongodb.entities.User;
 import com.marcelloventurini.springmongodb.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +51,11 @@ public class UserResource {
     user.setId(id);
     user = userService.update(user);
     return ResponseEntity.noContent().build();
+  }
+
+  @GetMapping(value = "/{id}/posts")
+  public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+    User user = userService.findById(id);
+    return ResponseEntity.ok().body(user.getPosts());
   }
 }
