@@ -1,6 +1,5 @@
 package com.marcelloventurini.springmongodb.resources.util;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 
